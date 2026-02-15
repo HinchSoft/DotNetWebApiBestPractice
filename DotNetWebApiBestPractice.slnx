@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CQRSServices/CQRSServices.csproj" />
+  <Project Path="CQRSServicesTests/CQRSServicesTests.csproj" Id="acfacc6f-d0c1-459e-b6a3-87129483b4d9" />
+  <Project Path="DemoApi/DemoApi.csproj" />
+</Solution>

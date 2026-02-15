@@ -1,0 +1,36 @@
+@DemoApi_HostAddress = http://localhost:5053
+
+# Should return all users
+GET {{DemoApi_HostAddress}}/sync/users
+Accept: application/json
+
+###
+# Should return user 2
+GET {{DemoApi_HostAddress}}/sync/users/2
+
+###
+# Should return 404 not found 
+GET {{DemoApi_HostAddress}}/sync/users/200
+
+###
+# First call should add user, second call should return conflict
+PUT {{DemoApi_HostAddress}}/sync/users
+Content-Type: application/json
+
+{
+  "name": "User 100"
+}
+
+###
+# First call should add user, second call should return conflict
+POST {{DemoApi_HostAddress}}/sync/users/3
+Content-Type: application/json
+
+{
+  "name": "User 103"
+}
+
+###
+
+GET {{DemoApi_HostAddress}}/stream/users
+
