@@ -25,22 +25,27 @@ public class SynchronousEndpoints : IEndpoint
         app.MapPut("sync/users", async ([FromBody] UserDetail userDetail, ISender sender) =>
         {
             var res = await sender.SendAsync(new AddUser.Command(userDetail.Name));
-            return res.HttpResultCreated(v=>$"sync/users/{v.Id}");
+            return res.HttpResultCreated(v => $"sync/users/{v.Id}");
         });
+
         app.MapPost("sync/users/{id:int}", async (int id, [FromBody] UserDetail userDetail, ISender sender) =>
         {
             var res = await sender.SendAsync(new UpdateUser.Command(id, userDetail.Name));
             return res.HttpResult();
         });
-        app.MapGet("sync/Report/{id}", async (string id, ISender sender, IHttpResultService resultService) =>
-        {
-            var res = await sender.SendAsync(new CreateReport.Command(id));
 
-            return res.HttpResultAccepted(v=>resultService.GenerateLocationFromPath($"sync/Status/{v.Id}"), (v,l) = new AcceptStatus(v.ReportId)));
+        app.MapGet("sync/Report/{name}", async (string name, ISender sender, IHttpResultService resultService) =>
+        {
+            var res = await sender.SendAsync(new CreateReport.Command(name));
+
+            return res.HttpResultAccepted(v => resultService.GenerateUrlByRouteName("GetStatus", new { v.StatusId }));
         });
 
+        app.MapGet("sync/status/{StatusId}", async (string statusId, ISender sender) =>
+        {
+
+        })
+        .WithName("GetStatus");
 
     }
 }
-
-public record AcceptStatus(string Id);

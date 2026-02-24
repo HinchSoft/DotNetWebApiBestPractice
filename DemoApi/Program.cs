@@ -1,4 +1,5 @@
 using Api.Common;
+using CQRSServices.ApiResults;
 using DemoApi.Services;
 using Scalar.AspNetCore;
 
@@ -9,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<DataService>();
+
+builder.Services.AddScoped<IHttpResultService, HttpResultService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.AddEndpoints();
 builder.AddCQRS();

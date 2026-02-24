@@ -9,31 +9,31 @@ namespace CQRSServices.ApiResults;
 public static class ResultExtensions
 {
 
-    public static IResult HttpResult(this Result response)
+    public static IResult HttpResult(this Result result)
     {
-        if (response.IsSuccess)
+        if (result.IsSuccess)
             return HttpResults.NoContent();
-        else if (response.NotFound)
-            return HttpResults.NotFound(response.Errors);
-        else if (response.Conflict)
-            return HttpResults.Conflict(response.Errors);
+        else if (result.NotFound)
+            return HttpResults.NotFound(result.Errors);
+        else if (result.Conflict)
+            return HttpResults.Conflict(result.Errors);
 
-        return HttpResults.BadRequest(response.Errors);
+        return HttpResults.BadRequest(result.Errors);
     }
 
-    public static IResult HttpResult<T>(this Result<T> response)
+    public static IResult HttpResult<T>(this Result<T> result)
     {
-        if (response.IsSuccess && response.Value is not null)
+        if (result.IsSuccess && result.Value is not null)
         {
-            return HttpResults.Ok(response.Value);
+            return HttpResults.Ok(result.Value);
         }
         else
-            return HttpResult((Result)response);
+            return HttpResult((Result)result);
     }
 
-    public static IResult HttpResultServerSentEvents<T>(this Result<IAsyncEnumerable<T>> response, Func<T,SseItem<T>>? sseItem = null)
+    public static IResult HttpResultServerSentEvents<T>(this Result<IAsyncEnumerable<T>> result, Func<T,SseItem<T>>? sseItem = null)
     {
-        if (response.IsSuccess && response.Value is not null)
+        if (result.IsSuccess && result.Value is not null)
         {
             async IAsyncEnumerable<SseItem<T>> GetStream(IAsyncEnumerable<T> value)
             {
@@ -43,55 +43,40 @@ public static class ResultExtensions
                 }
             }
 
-            return TypedResults.ServerSentEvents((dynamic)GetStream(response.Value));
+            return TypedResults.ServerSentEvents((dynamic)GetStream(result.Value));
         }
         else
-            return HttpResult((Result)response);
+            return HttpResult((Result)result);
     }
 
-    public static IResult HttpResultCreated<T>(this Result<T> response, Func<T, string> uri)
+    public static IResult HttpResultCreated<T>(this Result<T> result, Func<T, string> uri)
     {
-        if (response.IsSuccess && response.Value is not null)
+        if (result.IsSuccess && result.Value is not null)
         {
-            return TypedResults.Created(uri(response.Value),response.Value);
+            return TypedResults.Created(uri(result.Value),result.Value);
         }
         else
-            return HttpResult((Result)response);
+            return HttpResult((Result)result);
     }
-    public static IResult HttpResultCreatedAtRoute<T>(this Result<T> response,string routename, Func<T, RouteValueDictionary> routeValues)
+    public static IResult HttpResultCreatedAtRoute<T>(this Result<T> result,string routename, Func<T, RouteValueDictionary> routeValues)
     {
-        if (response.IsSuccess && response.Value is not null)
+        if (result.IsSuccess && result.Value is not null)
         {
-            return TypedResults.CreatedAtRoute(routename, routeValues(response.Value));
+            return TypedResults.CreatedAtRoute(routename, routeValues(result.Value));
         }
         else
-            return HttpResult((Result)response);
+            return HttpResult((Result)result);
     }
 
-    public static IResult HttpResultAccepted<TVal, TStatus>(this Result<TVal> response, Func<TVal, string> location, Func<TVal,TStatus> status)
+    public static IResult HttpResultAccepted(this Result<Accepted> result, Func<Accepted, string> location)
     {
-        if (response.IsSuccess && response.Value is not null)
+        if (result.IsSuccess && result.Value is not null)
         {
-            var st=status(response.Value);
-            return TypedResults.Accepted(location(response.Value), st);
+                return TypedResults.Accepted(location(result.Value),result.Value);
         }
         else
-            return HttpResult((Result)response);
+            return HttpResult((Result)result);
     }
 
-    //public static IResult HttpResultAcceptedAtRoute<T, TStatus>(this Result<T> response,string routename, Func<T, RouteValueDictionary> routeValues,)
-    //{
-    //    if (response.IsSuccess && response.Value is not null)
-    //    {
-    //        return TypedResults.AcceptedAtRoute(response.Value, routename, routeValues(response.Value));
-    //    }
-    //    else
-    //        return HttpResult((Result)response);
-    //}
 
-    public class Location<TStatus>
-    {
-        public string Uri { get; set; }
-        public TStatus? Status { get; set; }
-    }
 }

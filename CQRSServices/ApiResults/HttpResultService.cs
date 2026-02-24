@@ -1,5 +1,6 @@
 ﻿using CQRSServices.CQRS;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,23 +9,29 @@ namespace CQRSServices.ApiResults;
 
 public interface IHttpResultService
 {
-    string GenerateLocationFromPath(string path, params object[] args);
+    string GenerateUrlByRouteName(string routeName, object? values = null);
 }
 
 public class HttpResultService :IHttpResultService
 {
-    private readonly HttpContext _context;
-    private readonly string _rootUrl;
-    public HttpResultService(HttpContext context)
+    private readonly IHttpContextAccessor _contextAccessor;
+    private readonly LinkGenerator _linkGenerator;
+
+
+    public HttpResultService(IHttpContextAccessor contextAccessor, LinkGenerator linkGenerator)
     {
-        _context = context;
-        // Build the full URL
-        var request = context.Request;
-        _rootUrl = $"{request.Scheme}://{request.Host}";
+        _contextAccessor = contextAccessor;
+        _linkGenerator = linkGenerator;
     }
 
-    public string GenerateLocationFromPath(string path, params object[] args)
+    public string? GenerateUrlByRouteName(string routeName, object? values = null)
     {
-        return string.Format($"{_rootUrl}{path}",args);
+        var context = _contextAccessor.HttpContext;
+        if (context is null)
+            return null;
+        var url = _linkGenerator.GetUriByName(context, routeName, values);
+        return url;
     }
+
+
 }

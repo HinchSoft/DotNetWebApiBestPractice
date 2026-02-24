@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.ServerSentEvents;
-using System.Runtime.CompilerServices;
-using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Collections.Concurrent;
 
 namespace CQRSServices.Results;
 
@@ -36,7 +31,7 @@ public class ResultBuilder
         return this;
     }
 
-    public void AddResponse(Result responseIn)
+    public void AddResult(Result responseIn)
     {
         foreach(var e in responseIn.Errors)
         {
@@ -48,7 +43,7 @@ public class ResultBuilder
 
     public TIn? AddResult<TIn>(Result<TIn> responseIn)
     {
-        AddResponse((Result)responseIn);
+        AddResult((Result)responseIn);
         return responseIn.Value;
     }
 
@@ -66,6 +61,8 @@ public class ResultBuilder
 public class ResultBuilder<TOut>:ResultBuilder 
 {
     private TOut? _value = default;
+    private ConcurrentDictionary<string, object> metadata { get; } = new ConcurrentDictionary<string, object>();
+
 
     public ResultBuilder<TOut> AddError(string error)
     {
@@ -84,6 +81,11 @@ public class ResultBuilder<TOut>:ResultBuilder
         return this;
     }
 
+    public void AddMetadata(string key,object value)
+    {
+        metadata[key] = value;
+    }
+
     public ResultBuilder<TOut> AddValue(TOut value)
     {
         _value = value;
@@ -92,7 +94,7 @@ public class ResultBuilder<TOut>:ResultBuilder
 
     public TOut AddResult(Result<TOut> respIn)
     {
-        AddResponse((Result)respIn);
+        AddResult((Result)respIn);
         _value= respIn.Value;
         return respIn.Value; 
     }

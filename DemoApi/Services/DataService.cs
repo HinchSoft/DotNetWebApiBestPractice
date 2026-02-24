@@ -1,6 +1,6 @@
-﻿
-using CQRSServices.ServiceResponses;
+﻿using CQRSServices.Results;
 using DemoApi.Models;
+using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 
 namespace DemoApi.Services;
@@ -44,4 +44,23 @@ public class DataService
             yield return user;
         }
     }
+
+    #region Async mocks
+
+    private ConcurrentDictionary<string, BackGround> _backgroundTasks { get; } = new ConcurrentDictionary<string, BackGround>();
+
+
+    internal Task<Accepted> CreateReport(string name, CancellationToken cancellationToken)
+    {
+        var id = Guid.NewGuid().ToString();
+        var ret = new Accepted ( id );
+
+        return Task.FromResult(ret);
+    }
+
+    private class BackGround
+    {
+        public string Status { get; set; } = "Queued";
+    }
+    #endregion
 }

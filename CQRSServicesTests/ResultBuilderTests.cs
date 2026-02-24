@@ -1,16 +1,16 @@
-﻿using CQRSServices.ServiceResponses;
+﻿using CQRSServices.Results;
 using CQRSServicesTests.TestObjects;
 using FluentAssertions;
 
 namespace CQRSServicesTests;
 
-public class ResponseBuilderTests
+public class ResultBuilderTests
 {
     [Fact]
     public void ResponseHasMultipleErrors()
     {
         // Arrange
-        var sut = new ResponseBuilder();
+        var sut = new ResultBuilder();
 
         // Act
         sut.AddError("Error1");
@@ -25,7 +25,7 @@ public class ResponseBuilderTests
     public void ResponseRemovesDuplicateErrors()
     {
         // Arrange
-        var sut = new ResponseBuilder();
+        var sut = new ResultBuilder();
 
         // Act
         sut.AddError("Error");
@@ -40,11 +40,11 @@ public class ResponseBuilderTests
     public void GenericResponseTakesResponse_OK()
     {
         // Arrange
-        var b2 = new Response(new string[] { }, false, false);
-        var sut = new ResponseBuilder<TestClass1>();
+        var b2 = new Result(new string[] { }, false, false);
+        var sut = new ResultBuilder<TestClass1>();
 
         // Act
-        sut.AddResponse(b2);
+        sut.AddResult(b2);
         var res = sut.Build();
 
         // assert
@@ -56,11 +56,11 @@ public class ResponseBuilderTests
     public void GenericResponseTakesResponse_Errors()
     {
         // Arrange
-        var b2 = new Response(new string[] {"An Error"}, false, false);
-        var sut = new ResponseBuilder<TestClass1>();
+        var b2 = new Result(new string[] {"An Error"}, false, false);
+        var sut = new ResultBuilder<TestClass1>();
 
         // Act 
-        sut.AddResponse(b2);
+        sut.AddResult(b2);
         var res = sut.Build();
 
         // assert
@@ -73,11 +73,11 @@ public class ResponseBuilderTests
     public void GenericResponseTakesResponse_NotFound()
     {
         // Arrange
-        var b2 = new Response(new string[] { "Not Found" }, true, false);
-        var sut = new ResponseBuilder<TestClass1>();
+        var b2 = new Result(new string[] { "Not Found" }, true, false);
+        var sut = new ResultBuilder<TestClass1>();
 
         // Act
-        sut.AddResponse(b2);
+        sut.AddResult(b2);
         var res = sut.Build();
 
         // Assert
@@ -91,11 +91,11 @@ public class ResponseBuilderTests
     public void GenericResponseTakesResponse_Conflict()
     {
         // Arrange
-        var b2 = new Response(new string[] { "Conflict" }, false, true);
-        var sut = new ResponseBuilder<TestClass1>();
+        var b2 = new Result(new string[] { "Conflict" }, false, true);
+        var sut = new ResultBuilder<TestClass1>();
 
         // Act
-        sut.AddResponse(b2);
+        sut.AddResult(b2);
         var res = sut.Build();
 
         // Assert
@@ -109,11 +109,11 @@ public class ResponseBuilderTests
     public void GenericResponseTakesGenericResponse_ReturnsValue()
     {
         // Arange
-        var r2 = new Response<TestClass2>(new string[] { }, false, false, new TestClass2 { Name = "object 2" });
-        var sut = new ResponseBuilder<TestClass1>();
+        var r2 = new Result<TestClass2>(new string[] { }, false, false, new TestClass2 { Name = "object 2" });
+        var sut = new ResultBuilder<TestClass1>();
 
         // Act
-        var val = sut.AddResponse(r2);
+        var val = sut.AddResult(r2);
         var res = sut.Build();
 
         //Assert
@@ -127,11 +127,11 @@ public class ResponseBuilderTests
     public void GenericResponseTakesGenericResponse_ReturnsNotFound()
     {
         // Arange
-        var r2 = new Response<TestClass2>(new string[] {"Not Found"}, true, false, null);
-        var sut = new ResponseBuilder<TestClass1>();
+        var r2 = new Result<TestClass2>(new string[] {"Not Found"}, true, false, null);
+        var sut = new ResultBuilder<TestClass1>();
 
         // Act
-        var val = sut.AddResponse(r2);
+        var val = sut.AddResult(r2);
         var res = sut.Build();
 
         //Assert

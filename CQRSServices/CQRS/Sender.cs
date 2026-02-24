@@ -5,6 +5,7 @@ namespace Api.Common.CQRS;
 
 public class Sender(IServiceProvider provider) : ISender
 {
+    /// <inheritdoc/>
     public Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
     {
         var handlerType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
@@ -12,6 +13,7 @@ public class Sender(IServiceProvider provider) : ISender
         return handler.ExecuteAsync((dynamic)request, cancellationToken);
     }
 
+    /// <inheritdoc/>
     public TResponse Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
     {
         var handlerType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
