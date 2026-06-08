@@ -1,11 +1,15 @@
-﻿using CQRSServices.ApiResults;
+﻿using Asp.Versioning.Builder;
+using AspPresentation.Exceptions;
+using AspPresentation.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using ServiceManagement.Services;
 using System.Reflection;
 
+// ReSharper disable once CheckNamespace
 namespace Api.Common;
 
 public static class ServiceExtensions
@@ -60,11 +64,33 @@ public static class ServiceExtensions
         return app;
     }
 
-    public static TBuilder AddApiResponses<TBuilder>(this TBuilder builder, params Assembly[] assemblys)
+    public static TBuilder AddApiResponses<TBuilder>(this TBuilder builder)
             where TBuilder : IHostApplicationBuilder
     {
-        builder.Services.AddScoped<IHttpResultService, HttpResultService>();
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<IApiUtilities, ApiUtilities>();
 
         return builder;
     }
+
+    public static TBuilder AddGlobalProblemDetails<TBuilder>(this TBuilder builder)
+            where TBuilder : IHostApplicationBuilder
+    {
+        // Add Problem Details Service
+        builder.Services.AddProblemDetails(opt =>
+        {
+            opt.CustomizeProblemDetails = context =>
+            {
+                context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method}:{context.HttpContext.Request.Path}";
+                context.ProblemDetails.Extensions.Add("requestId", context.HttpContext.TraceIdentifier);
+            };
+        });
+
+        builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+
+        return builder;
+    }
+    
 }

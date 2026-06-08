@@ -1,9 +1,29 @@
 <Solution>
+  <Folder Name="/Application.Tests/">
+    <Project Path="ArchitectureTests/ArchitectureTests.csproj" Id="9c529101-ca14-4987-9308-72aa535eeb24" />
+  </Folder>
+  <Folder Name="/Application/">
+    <Project Path="AspireMigration/AspireMigration.csproj" />
+    <Project Path="Demo.Application/Demo.Application.csproj" Id="aebba28e-5e14-453e-857f-1563fe359099" />
+    <Project Path="Demo.Domain/Demo.Domain.csproj" Id="32485fbf-e52e-4073-bc62-a5f33239a569" />
+    <Project Path="Demo.Infrastructure/Demo.Infrastructure.csproj" Id="94d52fff-0808-4819-a1ec-0796c2d07730" />
+    <Project Path="DemoApi/DemoApi.csproj" />
+  </Folder>
+  <Folder Name="/Packages.Tests/">
+    <Project Path="DomainTests/DomainTests.csproj" />
+    <Project Path="ServiceManagementTests/ServiceManagementTests.csproj" />
+  </Folder>
+  <Folder Name="/Packages/">
+    <Project Path="AspireDefaults/AspireDefaults.csproj" Id="b4792218-667e-4da0-a799-77d24b1a196c" />
+    <Project Path="AspPresentation/AspPresentation.csproj" />
+    <Project Path="Domain/Domain.csproj" />
+    <Project Path="EFInfrastructure/EFInfrastructure.csproj" Id="cedc060c-155c-4e80-b2d9-102f05b276a7" />
+    <Project Path="ServiceManagement/ServiceManagement.csproj" Id="4812b22f-0270-42e8-92b8-e22b0d13926d" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path="LICENSE.txt" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="CQRSServices/CQRSServices.csproj" />
-  <Project Path="CQRSServicesTests/CQRSServicesTests.csproj" Id="acfacc6f-d0c1-459e-b6a3-87129483b4d9" />
-  <Project Path="DemoApi/DemoApi.csproj" />
+  <Project Path="DotNetWebApiBestPractice.AppHost/DotNetWebApiBestPractice.AppHost.csproj" Id="9f003840-fb16-476d-8282-ddc84832ec8a" />
+  <Project Path="DotNetWebApiBestPractice.ServiceDefaults/DotNetWebApiBestPractice.ServiceDefaults.csproj" />
 </Solution>
