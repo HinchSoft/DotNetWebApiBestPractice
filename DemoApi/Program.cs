@@ -1,24 +1,42 @@
 using Api.Common;
-using CQRSServices.ApiResults;
-using DemoApi.Services;
+using Demo.Application.Handlers;
+using Demo.Infrastructure.Data;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.ReportApiVersions = true;
+}).AddApiExplorer(opt =>
+{
+    opt.GroupNameFormat = "'v'VVV";
+    opt.SubstituteApiVersionInUrl = true;
+});
 
-builder.Services.AddSingleton<DataService>();
+builder.AddGlobalProblemDetails();
+builder.Services.AddValidation();
 
-builder.Services.AddScoped<IHttpResultService, HttpResultService>();
-builder.Services.AddHttpContextAccessor();
+builder.AddNpgsqlDbContext<ApplicationDbContext>("demodb");
+
+
+builder.Services.AddRepositories();
+builder.Services.AddCQRS(typeof(AddUserCommand).Assembly);
+builder.Services.AddValidators();
 
 builder.AddEndpoints();
-builder.AddCQRS();
 builder.AddApiResponses();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -32,6 +50,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// used to enable Problem Detail returns
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 
 app.MapEndpoints();
 
