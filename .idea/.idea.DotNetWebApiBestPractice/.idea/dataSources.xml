@@ -11,11 +11,11 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="pgsql" uuid="71da57ed-fcc3-409d-864a-2519ab302e12">
+    <data-source source="LOCAL" name="pgsql" uuid="0a5bcac3-6b9e-482a-b0e7-8665941abdf6">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:38735/?password=sd2g_VHYEK%21fq%28ubTpa%21%7Bj&amp;user=postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:39501/?password=sd2g_VHYEK%21fq%28ubTpa%21%7Bj&amp;user=postgres</jdbc-url>
       <jdbc-additional-properties>
         <property name="aspireResourceId" value="pgsql-5b5a0c40" />
       </jdbc-additional-properties>

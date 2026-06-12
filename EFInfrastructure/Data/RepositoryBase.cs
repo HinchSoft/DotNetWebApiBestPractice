@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Demo.Domain.Data;
 using Microsoft.EntityFrameworkCore;
+using ServiceManagement.Data;
 
 namespace EFInfrastructure.Data;
 

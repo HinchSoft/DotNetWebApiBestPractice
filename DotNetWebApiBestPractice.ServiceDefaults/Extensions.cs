@@ -50,7 +50,7 @@ public static class Extensions
         {
             logging.IncludeFormattedMessage = true;
             logging.IncludeScopes = true;
-        });
+        }).EnableRedaction();
 
         builder.Services.AddOpenTelemetry()
             .WithMetrics(metrics =>

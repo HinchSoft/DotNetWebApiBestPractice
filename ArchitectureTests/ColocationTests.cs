@@ -1,7 +1,6 @@
-﻿using Demo.Application.Handlers;
+﻿using DemoApplication.Handlers;
 using FluentAssertions;
 using ServiceManagement.CQRS;
-
 
 namespace ArchitectureTests;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Demo.Domain.Data;
+﻿namespace ServiceManagement.Data;
 
 public interface IUnitOfWork
 {

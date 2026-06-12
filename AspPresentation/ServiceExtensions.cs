@@ -1,4 +1,6 @@
-﻿using Asp.Versioning.Builder;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AspPresentation.Exceptions;
 using AspPresentation.Services;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using ServiceManagement.Services;
 using System.Reflection;
+using AspPresentation.LoggingRedactors;
+using Domain.PIILogging;
 
 // ReSharper disable once CheckNamespace
 namespace Api.Common;
@@ -17,17 +21,17 @@ public static class ServiceExtensions
     /// <summary>
     /// Looks for and adds the endpoints defined in IEndpoint classes.
     /// </summary>
-    /// <param name="assemblys">(Optional) The assemblies to scan for endpoints. If none are provided, the calling assembly is used.</param>
-    public static TBuilder AddEndpoints<TBuilder>(this TBuilder builder, params Assembly[] assemblys)
+    /// <param name="assemblies">(Optional) The assemblies to scan for endpoints. If none are provided, the calling assembly is used.</param>
+    public static TBuilder AddEndpoints<TBuilder>(this TBuilder builder, params Assembly[] assemblies)
         where TBuilder : IHostApplicationBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
-        if (assemblys is null || !assemblys.Any())
+        if (assemblies.Length == 0)
         {
-            assemblys = new Assembly[] { Assembly.GetCallingAssembly() };
+            assemblies = [Assembly.GetCallingAssembly()];
         }
 
-        foreach (var assembly in assemblys)
+        foreach (var assembly in assemblies)
         {
             ServiceDescriptor[] serviceDescriptors = assembly
                 .DefinedTypes
@@ -92,5 +96,15 @@ public static class ServiceExtensions
 
         return builder;
     }
-    
+
+    public static IServiceCollection AddRedactionLogging(this IServiceCollection services)
+    {
+        services.AddRedaction(rb =>
+        {
+            rb.SetRedactor<FullStarRedactor>(PIIClassifications.Private);
+            rb.SetRedactor<PartialStarRedactor>(PIIClassifications.Personal);
+        });
+
+        return services;
+    }
 }

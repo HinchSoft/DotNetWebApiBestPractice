@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Demo.Application\Demo.Application.csproj" />
-    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj" />
-    <ProjectReference Include="..\Demo.Infrastructure\Demo.Infrastructure.csproj" />
+    <ProjectReference Include="..\DemoApplication\DemoApplication.csproj" />
+    <ProjectReference Include="..\DemoDomain\DemoDomain.csproj" />
+    <ProjectReference Include="..\Demo_Infrastructure\Demo_Infrastructure.csproj" />
     <ProjectReference Include="..\DemoApi\DemoApi.csproj" />
   </ItemGroup>
 

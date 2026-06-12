@@ -4,12 +4,13 @@
   </Folder>
   <Folder Name="/Application/">
     <Project Path="AspireMigration/AspireMigration.csproj" />
-    <Project Path="Demo.Application/Demo.Application.csproj" Id="aebba28e-5e14-453e-857f-1563fe359099" />
-    <Project Path="Demo.Domain/Demo.Domain.csproj" Id="32485fbf-e52e-4073-bc62-a5f33239a569" />
-    <Project Path="Demo.Infrastructure/Demo.Infrastructure.csproj" Id="94d52fff-0808-4819-a1ec-0796c2d07730" />
     <Project Path="DemoApi/DemoApi.csproj" />
+    <Project Path="DemoApplication/DemoApplication.csproj" Id="aebba28e-5e14-453e-857f-1563fe359099" />
+    <Project Path="DemoDomain/DemoDomain.csproj" Id="32485fbf-e52e-4073-bc62-a5f33239a569" />
+    <Project Path="DemoInfrastructure/DemoInfrastructure.csproj" Id="94d52fff-0808-4819-a1ec-0796c2d07730" />
   </Folder>
   <Folder Name="/Packages.Tests/">
+    <Project Path="AspPresentationTests/AspPresentationTests.csproj" />
     <Project Path="DomainTests/DomainTests.csproj" />
     <Project Path="ServiceManagementTests/ServiceManagementTests.csproj" />
   </Folder>

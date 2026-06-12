@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Domain.Results;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.ServerSentEvents;
+using Domain.Results;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using HttpResults = Microsoft.AspNetCore.Http.Results;
 
-namespace ServiceManagement.Results;
+namespace AspPresentation.ApiResults;
 
 public static class ResultExtensions
 {

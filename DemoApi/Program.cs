@@ -1,9 +1,11 @@
 using Api.Common;
-using Demo.Application.Handlers;
-using Demo.Infrastructure.Data;
+using DemoApplication.Handlers;
+using DemoInfrastructure.Data;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRedactionLogging();
 
 builder.AddServiceDefaults();
 
@@ -58,4 +60,3 @@ app.UseStatusCodePages();
 app.MapEndpoints();
 
 app.Run();
-

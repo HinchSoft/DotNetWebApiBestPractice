@@ -1,5 +1,5 @@
 using AspireMigration;
-using Demo.Infrastructure.Data;
+using DemoInfrastructure.Data;
 
 var builder = Host.CreateApplicationBuilder(args);
 
