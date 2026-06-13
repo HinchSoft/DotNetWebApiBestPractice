@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-AspireMigration-25628983-a46f-407f-a052-b4b31cef7bd5</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Packages\src\AspireDefaults\AspireDefaults.csproj" />
+    <ProjectReference Include="..\DemoInfrastructure\DemoInfrastructure.csproj" />
+    <ProjectReference Include="..\Demo_Infrastructure\Demo_Infrastructure.csproj" />
+    <ProjectReference Include="..\DotNetWebApiBestPractice.ServiceDefaults\DotNetWebApiBestPractice.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>
