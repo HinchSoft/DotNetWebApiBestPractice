@@ -1,6 +1,6 @@
-using AspireDefaults;
 using DemoDomain.Models;
 using DemoInfrastructure.Data;
+using Hinchsoft.BestPractices.AspireDefaults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 

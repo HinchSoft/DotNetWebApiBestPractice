@@ -1,4 +1,3 @@
-using Api.Common;
 using DemoApplication.Handlers;
 using DemoInfrastructure.Data;
 using Scalar.AspNetCore;

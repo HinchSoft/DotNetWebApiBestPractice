@@ -1,5 +1,5 @@
 ﻿using DemoDomain.Models;
-using Domain.PIILogging;
+using Hinchsoft.BestPractices.Domain.PIILogging;
 using Microsoft.Extensions.Logging;
 
 namespace DemoApplication.Logging;

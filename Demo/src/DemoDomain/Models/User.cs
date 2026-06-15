@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using Hinchsoft.BestPractices.Domain;
 
 namespace DemoDomain.Models;
 

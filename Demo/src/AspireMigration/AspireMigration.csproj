@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Packages\src\AspireDefaults\AspireDefaults.csproj" />
     <ProjectReference Include="..\DemoInfrastructure\DemoInfrastructure.csproj" />
-    <ProjectReference Include="..\Demo_Infrastructure\Demo_Infrastructure.csproj" />
     <ProjectReference Include="..\DotNetWebApiBestPractice.ServiceDefaults\DotNetWebApiBestPractice.ServiceDefaults.csproj" />
   </ItemGroup>
 </Project>

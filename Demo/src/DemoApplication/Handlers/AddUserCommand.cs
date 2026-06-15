@@ -1,7 +1,7 @@
 ﻿using DemoApplication.Logging;
 using DemoDomain.Models;
-using Domain;
 using FluentValidation;
+using Hinchsoft.BestPractices.Domain;
 using Microsoft.Extensions.Logging;
 using ServiceManagement.CQRS;
 using ServiceManagement.Data;
