@@ -1,8 +1,11 @@
-﻿using DemoApplication.Handlers.AddUser;
+﻿using DemoApplication.Handlers;
+using DemoApplication.Handlers.AddUserCommand;
+using FluentAssertions;
 using TestHelper.Architecture;
+
 
 namespace ArchitectureTests;
 
-public class ColocationTests : SameNamespaceColocationTestRunner<AddUserCommand>
+public class ColocationTests : SameNamespaceColocationTestRunner<AddUserRequest>
 {
 }
