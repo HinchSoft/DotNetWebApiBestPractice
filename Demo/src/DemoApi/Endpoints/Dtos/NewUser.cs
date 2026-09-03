@@ -5,17 +5,14 @@ namespace DemoApi.Endpoints.Dtos;
 
 public record NewUser(
     [Required(ErrorMessage = "First Name is required")]
-    [StringLength(50,MinimumLength = 3, ErrorMessage = "First name must be between 3 and 50 characters")]
-    string FirstName, 
-
+    [StringLength(50, MinimumLength = 3, ErrorMessage = "First name must be between 3 and 50 characters")]
+    string FirstName,
     [Required(ErrorMessage = "Last Name is required")]
-    [StringLength(50,MinimumLength = 3, ErrorMessage = "Last name must be between 3 and 50 characters")]
+    [StringLength(50, MinimumLength = 3, ErrorMessage = "Last name must be between 3 and 50 characters")]
     string LastName,
-
     [Required(ErrorMessage = "Email is required")]
     [EmailAddress(ErrorMessage = "Invalid Email")]
     string Email,
-
     [Required(ErrorMessage = "Date of birth is required")]
     [DateAge(100)]
     DateTime? DatOfBirth);

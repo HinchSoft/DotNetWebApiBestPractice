@@ -10,7 +10,6 @@ public class UserEndPoints : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-
         app.MapPut("/users",
             async ([FromBody] NewUser newUser, ISender sender, CancellationToken cancellationToken) =>
             await sender.Send(new AddUserCommand.Command(

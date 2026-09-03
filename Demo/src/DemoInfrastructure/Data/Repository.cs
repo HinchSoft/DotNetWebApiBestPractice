@@ -1,4 +1,4 @@
-﻿using EFInfrastructure.Data;
+﻿using RDH.EFInfrastructure.Data;
 
 namespace DemoInfrastructure.Data;
 
@@ -6,5 +6,4 @@ internal class Repository<TEntity>(ApplicationDbContext context)
     : RepositoryBase<TEntity, ApplicationDbContext>(context)
     where TEntity : class
 {
-
 }

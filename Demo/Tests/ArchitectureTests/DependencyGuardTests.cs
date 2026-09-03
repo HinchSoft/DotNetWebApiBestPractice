@@ -1,11 +1,10 @@
 ﻿using ServiceManagement.CQRS;
 using ArchUnitNET.xUnit;
-
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace ArchitectureTests;
 
-public class DependencyGuardTests:BaseArchitectureTest
+public class DependencyGuardTests : BaseArchitectureTest
 {
     [Fact]
     public void DomainLayer_ShouldNotDependOn_EntityFramework()

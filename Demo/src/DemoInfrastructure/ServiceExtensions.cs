@@ -1,6 +1,5 @@
-﻿
-using DemoInfrastructure.Data;
-using ServiceManagement.Data;
+﻿using DemoInfrastructure.Data;
+using RDH.ApplicationLayer.Data;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
@@ -15,6 +14,4 @@ public static class ServiceExtensions
 
         return services;
     }
-
-
 }

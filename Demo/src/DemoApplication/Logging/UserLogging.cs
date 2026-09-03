@@ -1,6 +1,6 @@
 ﻿using DemoDomain.Models;
-using Hinchsoft.BestPractices.Domain.PIILogging;
 using Microsoft.Extensions.Logging;
+using RDH.Core.PIILogging;
 
 namespace DemoApplication.Logging;
 

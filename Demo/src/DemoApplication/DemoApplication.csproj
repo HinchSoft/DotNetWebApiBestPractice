@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DemoDomain\DemoDomain.csproj" />
-        <ProjectReference Include="..\..\..\Packages\src\ServiceManagement\ServiceManagement.csproj"/>
+        <ProjectReference Include="..\DemoDomain\DemoDomain.csproj"/>
+        <ProjectReference Include="..\..\..\Packages\src\ApplicationLayer\ApplicationLayer.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

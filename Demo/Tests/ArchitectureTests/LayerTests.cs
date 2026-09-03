@@ -7,10 +7,10 @@ using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace ArchitectureTests;
 
-public class LayerTests:BaseArchitectureTest
+public class LayerTests : BaseArchitectureTest
 {
     private static readonly IObjectProvider<IType> DomainLayer =
-     Types().That().ResideInAssembly(DomainAssembly).As("Domain layer");
+        Types().That().ResideInAssembly(DomainAssembly).As("Domain layer");
 
     private static readonly IObjectProvider<IType> ApplicationLayer =
         Types().That().ResideInAssembly(ApplicationAssembly).As("Application layer");
@@ -26,7 +26,7 @@ public class LayerTests:BaseArchitectureTest
     {
         Types().That().Are(DomainLayer).Should()
             .NotDependOnAny(ApplicationLayer)
-            .Check(Architecture);
+            .Check(ArchUnitNET.Domain.Architecture);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class LayerTests:BaseArchitectureTest
     {
         Types().That().Are(DomainLayer).Should()
             .NotDependOnAny(InfrastructureLayer)
-            .Check(Architecture);
+            .Check(ArchUnitNET.Domain.Architecture);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class LayerTests:BaseArchitectureTest
     {
         Types().That().Are(DomainLayer).Should()
             .NotDependOnAny(PresentationLayer)
-            .Check(Architecture);
+            .Check(ArchUnitNET.Domain.Architecture);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class LayerTests:BaseArchitectureTest
     {
         Types().That().Are(ApplicationLayer).Should()
             .NotDependOnAny(InfrastructureLayer)
-            .Check(Architecture);
+            .Check(ArchUnitNET.Domain.Architecture);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class LayerTests:BaseArchitectureTest
     {
         Types().That().Are(ApplicationLayer).Should()
             .NotDependOnAny(PresentationLayer)
-            .Check(Architecture);
+            .Check(ArchUnitNET.Domain.Architecture);
     }
 
     [Fact]
@@ -66,6 +66,6 @@ public class LayerTests:BaseArchitectureTest
     {
         Types().That().Are(InfrastructureLayer).Should()
             .NotDependOnAny(PresentationLayer)
-            .Check(Architecture);
+            .Check(ArchUnitNET.Domain.Architecture);
     }
 }
