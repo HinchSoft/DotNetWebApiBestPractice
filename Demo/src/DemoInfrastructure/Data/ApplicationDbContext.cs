@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DemoInfrastructure.Data;
 
-public class ApplicationDbContext:DbContext
+public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
@@ -21,5 +21,4 @@ public class ApplicationDbContext:DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
-
 }

@@ -1,4 +1,4 @@
-﻿using Hinchsoft.BestPractices.Domain;
+﻿using RDH.Core;
 
 namespace DemoDomain.Models;
 

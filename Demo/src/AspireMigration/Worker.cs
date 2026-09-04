@@ -18,7 +18,7 @@ public class Worker(
 
     protected override Task SeedDataAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
-        var addItems = _items.ExceptBy<Item, ItemId>(dbContext.Items.Select(i=>i.Id), i => i.Id);
+        var addItems = _items.ExceptBy<Item, ItemId>(dbContext.Items.Select(i => i.Id), i => i.Id);
         dbContext.Items.AddRange(addItems);
 
         dbContext.SaveChanges();
@@ -27,7 +27,7 @@ public class Worker(
 
     private Item[] _items = new[]
     {
-        new Item(new ItemId(Guid.Parse("25B75482-20DE-47FF-9476-17302D9584B9")), "Beany cap", "Beany Cap / Hat size 1", 2, 7.99m)
-
+        new Item(new ItemId(Guid.Parse("25B75482-20DE-47FF-9476-17302D9584B9")), "Beany cap", "Beany Cap / Hat size 1",
+            2, 7.99m)
     };
 }

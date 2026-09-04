@@ -1,4 +1,4 @@
-﻿using Hinchsoft.BestPractices.Domain;
+﻿using RDH.Core;
 
 namespace DemoDomain.Models;
 
@@ -10,4 +10,4 @@ public record User(
     DateOnly? DateOfBirth
 );
 
-public record UserId(Guid Value):EntityId(Value);
+public record UserId(Guid Value) : EntityId(Value);

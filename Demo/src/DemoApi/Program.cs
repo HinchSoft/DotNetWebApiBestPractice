@@ -1,4 +1,5 @@
 using DemoApplication.Handlers;
+using DemoApplication.Handlers.AddUser;
 using DemoInfrastructure.Data;
 using Scalar.AspNetCore;
 
@@ -46,7 +47,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference(options =>
     {
         options.WithTheme(ScalarTheme.Mars)
-        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
     });
 }
 

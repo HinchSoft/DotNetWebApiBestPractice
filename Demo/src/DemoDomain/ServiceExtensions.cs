@@ -1,5 +1,4 @@
-﻿
-using System.Reflection;
+﻿using System.Reflection;
 using DemoDomain.Validators;
 using FluentValidation;
 
@@ -8,11 +7,11 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection AddValidators(this IServiceCollection services,params Assembly[] assemblies)
+    public static IServiceCollection AddValidators(this IServiceCollection services, params Assembly[] assemblies)
     {
         services.AddValidatorsFromAssemblyContaining<UserValidator>();
         services.AddValidatorsFromAssemblies(assemblies);
-        
+
         return services;
     }
 }

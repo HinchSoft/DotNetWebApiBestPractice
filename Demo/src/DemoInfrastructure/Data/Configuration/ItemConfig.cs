@@ -13,6 +13,6 @@ internal class ItemConfig : IEntityTypeConfiguration<Item>
                 id => id.Value,
                 value => new ItemId(value));
         builder.ToTable("Items")
-            .HasKey(e=>e.Id).HasName("PK_Items");
+            .HasKey(e => e.Id).HasName("PK_Items");
     }
 }
