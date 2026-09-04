@@ -1,4 +1,5 @@
 using DemoApplication.Handlers;
+using DemoApplication.Handlers.AddUser;
 using DemoInfrastructure.Data;
 using Scalar.AspNetCore;
 

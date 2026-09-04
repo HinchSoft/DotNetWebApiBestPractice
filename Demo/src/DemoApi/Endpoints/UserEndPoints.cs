@@ -1,8 +1,10 @@
 ﻿using Asp.Versioning.Builder;
 using DemoApplication.Handlers;
 using DemoApi.Endpoints.Dtos;
+using DemoApplication.Handlers.AddUser;
 using Microsoft.AspNetCore.Mvc;
-using ServiceManagement.CQRS;
+using RDH.Core.CQRS;
+
 
 namespace DemoApi.Endpoints;
 
@@ -12,7 +14,7 @@ public class UserEndPoints : IEndpoint
     {
         app.MapPut("/users",
             async ([FromBody] NewUser newUser, ISender sender, CancellationToken cancellationToken) =>
-            await sender.Send(new AddUserCommand.Command(
+            await sender.Send(new AddUserCommand(
                 newUser.FirstName,
                 newUser.LastName,
                 newUser.Email,

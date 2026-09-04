@@ -1,13 +1,11 @@
-﻿using DemoDomain.Models;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace DemoDomain.Validators;
+namespace DemoApplication.Handlers.AddUser;
 
-public sealed class UserValidator : AbstractValidator<User>
+internal sealed class AddUserValidator : AbstractValidator<AddUserCommand>
 {
-    public UserValidator(TimeProvider timeProvider)
+    public AddUserValidator(TimeProvider timeProvider)
     {
-        RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
         RuleFor(x => x.LastName).NotEmpty().WithMessage("Please specify a last name");
         RuleFor(x => x.FirstName).NotEmpty().WithMessage("Please specify a first name");
         RuleFor(x => x.Email).EmailAddress()
