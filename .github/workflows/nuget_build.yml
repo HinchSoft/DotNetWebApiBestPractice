@@ -1,0 +1,5 @@
+﻿name: Build and publish NuGet
+run-name:
+
+on:
+  pull_request:
