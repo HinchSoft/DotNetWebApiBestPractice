@@ -1,0 +1,16 @@
+{
+  "solution": {
+    "path": "DotNetWebApiBestPractice.slnx",
+    "projects": [
+      "Packages/src/ApplicationLayer/ApplicationLayer.csproj",
+      "Packages/src/AspireDefaults/AspireDefaults.csproj",
+      "Packages/src/AspPresentation/AspPresentation.csproj",
+      "Packages/src/Core/Core.csproj",
+      "Packages/src/EFInfrastructure/EFInfrastructure.csproj",
+      "Packages/src/TestHelper/TestHelper.csproj",
+      "Packages/Tests/AspPresentationTests/AspPresentationTests.csproj",
+      "Packages/Tests/CoreTests/CoreTests.csproj",
+      "Packages/Tests/TestHelperTests/TestHelperTests.csproj"
+    ]
+  }
+}

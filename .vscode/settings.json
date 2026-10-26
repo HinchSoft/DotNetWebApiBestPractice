@@ -1,0 +1,29 @@
+{
+  "dotnet.defaultSolution": "DotNetWebApiBestPractice.slnx",
+  "dotnet.server.useOmnisharp": false,
+  "csharp.format.enable": true,
+  "editor.formatOnSave": true,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.csproj": "*.csproj.DotSettings",
+    "*.sln": "*.sln.DotSettings, *.slnx",
+    "*.slnx": "*.sln.DotSettings",
+    "appsettings.json": "appsettings.*.json"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.idea": false
+  },
+  "search.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/.idea": true,
+    "**/.vs": true
+  },
+  "chat.agent.enabled": false
+}
