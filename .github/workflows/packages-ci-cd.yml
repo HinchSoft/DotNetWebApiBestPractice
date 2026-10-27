@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       semVer: ${{ steps.gitversion.outputs.semVer }}
-      nuGetVersion: ${{ steps.gitversion.outputs.nuGetVersion }}
       fullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}
+      majorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -59,8 +59,8 @@ jobs:
       - name: Display determined version
         run: |
           echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
-          echo "NuGetVersion: ${{ steps.gitversion.outputs.nuGetVersion }}"
           echo "FullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
+          echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
 
   build:
     name: Build Packages
@@ -122,8 +122,8 @@ jobs:
       - name: Pack NuGet packages
         run: |
           mkdir -p ./nupkgs
-          VERSION="${{ needs.determine-version.outputs.nuGetVersion }}"
-          PACK_ARGS="Packages.slnf --configuration Release --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=${{ needs.determine-version.outputs.semVer }}"
+          VERSION="${{ needs.determine-version.outputs.semVer }}"
+          PACK_ARGS="Packages.slnf --configuration Release --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=$VERSION"
           if [ -n "${{ inputs.version_suffix }}" ]; then
             PACK_ARGS="$PACK_ARGS --version-suffix ${{ inputs.version_suffix }}"
           fi
