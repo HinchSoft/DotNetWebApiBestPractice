@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <AssemblyName>RDH.AspPresentation</AssemblyName>
+        <RootNamespace>RDH.AspPresentation</RootNamespace>
+        <PackageId>RDH.AspPresentation</PackageId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.Http" Version="10.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ApplicationLayer\ApplicationLayer.csproj"/>
+    </ItemGroup>
+
+</Project>
