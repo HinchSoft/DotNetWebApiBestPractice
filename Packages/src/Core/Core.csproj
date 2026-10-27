@@ -1,14 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <PackageId>RDH.Core</PackageId>
         <Title>Best Practices Core</Title>
-        <Version>1.0.0</Version>
         <Authors>David Hinchliffe</Authors>
         <Product>Dot Net Web Api Best Practices</Product>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <AssemblyName>RDH.Core</AssemblyName>
         <RootNamespace>RDH.Core</RootNamespace>

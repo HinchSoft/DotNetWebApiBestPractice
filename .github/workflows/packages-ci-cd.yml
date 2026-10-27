@@ -124,11 +124,14 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore Packages.slnf
 
+      - name: Build packages
+        run: dotnet build Packages.slnf --configuration Release --no-restore /p:Version=${{ needs.determine-version.outputs.semVer }}
+
       - name: Pack NuGet packages
         run: |
           mkdir -p ./nupkgs
           VERSION="${{ needs.determine-version.outputs.semVer }}"
-          PACK_ARGS="Packages.slnf --configuration Release --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=$VERSION"
+          PACK_ARGS="Packages.slnf --configuration Release --no-build --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=$VERSION"
           if [ -n "${{ inputs.version_suffix }}" ]; then
             PACK_ARGS="$PACK_ARGS --version-suffix ${{ inputs.version_suffix }}"
           fi
