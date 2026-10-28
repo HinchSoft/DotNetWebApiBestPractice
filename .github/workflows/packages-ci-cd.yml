@@ -1,0 +1,191 @@
+name: Packages CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'Packages/**'
+      - '.github/workflows/**'
+      - 'Packages.slnf'
+      - 'DotNetWebApiBestPractice.slnx'
+      - 'global.json'
+      - 'NuGet.Config'
+  push:
+    branches:
+      - main
+    paths:
+      - 'Packages/**'
+      - '.github/workflows/**'
+      - 'Packages.slnf'
+      - 'DotNetWebApiBestPractice.slnx'
+      - 'global.json'
+      - 'NuGet.Config'
+  workflow_dispatch:
+    inputs:
+      version_suffix:
+        description: 'Optional package version suffix (e.g. preview-1, rc.1)'
+        required: false
+        default: ''
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  determine-version:
+    name: Determine Version
+    runs-on: ubuntu-latest
+    outputs:
+      semVer: ${{ steps.gitversion.outputs.semVer }}
+      fullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}
+      majorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}
+      assemblySemVer: ${{ steps.gitversion.outputs.assemblySemVer }}
+      assemblySemFileVer: ${{ steps.gitversion.outputs.assemblySemFileVer }}
+      informationalVersion: ${{ steps.gitversion.outputs.informationalVersion }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v4
+        with:
+          versionSpec: '6.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v4
+
+      - name: Display determined version
+        run: |
+          echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+          echo "FullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
+          echo "MajorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}"
+
+  build:
+    name: Build Packages
+    needs: determine-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Display .NET environment
+        run: dotnet --info
+
+      - name: Restore dependencies
+        run: dotnet restore Packages.slnf
+
+      - name: Build packages and tests
+        run: >
+          dotnet build Packages.slnf --configuration Release --no-restore
+          /p:Version=${{ needs.determine-version.outputs.semVer }}
+          /p:AssemblyVersion=${{ needs.determine-version.outputs.assemblySemVer }}
+          /p:FileVersion=${{ needs.determine-version.outputs.assemblySemFileVer }}
+          /p:InformationalVersion=${{ needs.determine-version.outputs.informationalVersion }}
+
+  test:
+    name: Test Packages
+    needs: [determine-version, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore Packages.slnf
+
+      - name: Run unit tests
+        run: dotnet test Packages.slnf --configuration Release --verbosity normal
+
+  package:
+    name: Pack NuGet Packages
+    needs: [determine-version, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore Packages.slnf
+
+      - name: Build packages
+        run: >
+          dotnet build Packages.slnf --configuration Release --no-restore
+          /p:Version=${{ needs.determine-version.outputs.semVer }}
+          /p:AssemblyVersion=${{ needs.determine-version.outputs.assemblySemVer }}
+          /p:FileVersion=${{ needs.determine-version.outputs.assemblySemFileVer }}
+          /p:InformationalVersion=${{ needs.determine-version.outputs.informationalVersion }}
+
+      - name: Pack NuGet packages
+        run: |
+          mkdir -p ./nupkgs
+          VERSION="${{ needs.determine-version.outputs.semVer }}"
+          ASSEMBLY_VERSION="${{ needs.determine-version.outputs.assemblySemVer }}"
+          FILE_VERSION="${{ needs.determine-version.outputs.assemblySemFileVer }}"
+          INFORMATIONAL_VERSION="${{ needs.determine-version.outputs.informationalVersion }}"
+          PACK_ARGS="Packages.slnf --configuration Release --no-build --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=$VERSION /p:AssemblyVersion=$ASSEMBLY_VERSION /p:FileVersion=$FILE_VERSION /p:InformationalVersion=$INFORMATIONAL_VERSION"
+          if [ -n "${{ inputs.version_suffix }}" ]; then
+            PACK_ARGS="$PACK_ARGS --version-suffix ${{ inputs.version_suffix }}"
+          fi
+          dotnet pack $PACK_ARGS
+
+      - name: Upload NuGet packages artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: ./nupkgs/*.nupkg
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy to GitHub Packages
+    needs: package
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Download NuGet packages artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-packages
+          path: ./nupkgs
+
+      - name: Push packages to GitHub Packages
+        run: |
+          for pkg in ./nupkgs/*.nupkg; do
+            echo "Publishing $pkg to GitHub Packages..."
+            dotnet nuget push "$pkg" \
+              --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+              --api-key "${{ secrets.GITHUB_TOKEN }}" \
+              --skip-duplicate
+          done

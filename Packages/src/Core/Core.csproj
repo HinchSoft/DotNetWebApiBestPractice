@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <PackageId>RDH.Core</PackageId>
+        <Description>RDH Framework foundational abstractions, CQRS primitives, validation support, result models, and PII-oriented logging redaction.</Description>
+        <AssemblyName>RDH.Core</AssemblyName>
+        <RootNamespace>RDH.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="12.1.1"/>
+        <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="10.9.0" />
+    </ItemGroup>
+
+</Project>

@@ -36,6 +36,7 @@
     </Folder>
     <Folder Name="/Solution Items/">
         <File Path="LICENSE.txt"/>
+        <File Path="Packages.slnf"/>
         <File Path="README.md"/>
     </Folder>
 </Solution>

@@ -1,0 +1,109 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET: Aspire AppHost (https)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/Demo/src/DotNetWebApiBestPractice.AppHost/bin/Debug/net10.0/DotNetWebApiBestPractice.AppHost.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Demo/src/DotNetWebApiBestPractice.AppHost",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s"
+      },
+      "env": {
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_LAUNCH_PROFILE": "https",
+        "ASPNETCORE_URLS": "https://localhost:17297;http://localhost:15297",
+        "ASPIRE_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21105",
+        "ASPIRE_DASHBOARD_MCP_ENDPOINT_URL": "https://localhost:23188",
+        "ASPIRE_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22186"
+      }
+    },
+    {
+      "name": ".NET: Aspire AppHost (http)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/Demo/src/DotNetWebApiBestPractice.AppHost/bin/Debug/net10.0/DotNetWebApiBestPractice.AppHost.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Demo/src/DotNetWebApiBestPractice.AppHost",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s"
+      },
+      "env": {
+        "DOTNET_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_LAUNCH_PROFILE": "http",
+        "ASPNETCORE_URLS": "http://localhost:15297",
+        "ASPIRE_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19209",
+        "ASPIRE_DASHBOARD_MCP_ENDPOINT_URL": "http://localhost:18277",
+        "ASPIRE_RESOURCE_SERVICE_ENDPOINT_URL": "http://localhost:20281"
+      }
+    },
+    {
+      "name": ".NET: DemoApi (https)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/Demo/src/DemoApi/bin/Debug/net10.0/DemoApi.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Demo/src/DemoApi",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s/scalar/"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:7272;http://localhost:5053"
+      }
+    },
+    {
+      "name": ".NET: DemoApi (http)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/Demo/src/DemoApi/bin/Debug/net10.0/DemoApi.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Demo/src/DemoApi",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5053"
+      }
+    },
+    {
+      "name": ".NET: AspireMigration",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/Demo/src/AspireMigration/bin/Debug/net10.0/AspireMigration.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/Demo/src/AspireMigration",
+      "stopAtEntry": false,
+      "env": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": ".NET: Attach to Process",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ]
+}
