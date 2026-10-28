@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
@@ -7,9 +7,7 @@
         <AssemblyName>RDH.ApplicationLayer</AssemblyName>
         <RootNamespace>RDH.ApplicationLayer</RootNamespace>
         <PackageId>RDH.ApplicationLayer</PackageId>
-        <Authors>David Hinchliffe</Authors>
-        <Company>Hinchsoft</Company>
-        <Product>BestPractices.ServiceManagement</Product>
+        <Description>RDH Framework application contracts, repository interfaces, unit-of-work abstractions, and pagination utilities.</Description>
     </PropertyGroup>
 
     <ItemGroup>

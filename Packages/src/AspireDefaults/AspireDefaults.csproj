@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
@@ -6,6 +6,8 @@
         <Nullable>enable</Nullable>
         <AssemblyName>Hinchsoft.BestPractices.AspireDefaults</AssemblyName>
         <RootNamespace>Hinchsoft.BestPractices.AspireDefaults</RootNamespace>
+        <PackageId>RDH.AspireDefaults</PackageId>
+        <Description>RDH Framework hosted service and .NET Aspire startup support for database migrations and initialization.</Description>
     </PropertyGroup>
 
     <ItemGroup>

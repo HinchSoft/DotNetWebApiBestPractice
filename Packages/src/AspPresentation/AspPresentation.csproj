@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
@@ -6,6 +6,7 @@
         <AssemblyName>RDH.AspPresentation</AssemblyName>
         <RootNamespace>RDH.AspPresentation</RootNamespace>
         <PackageId>RDH.AspPresentation</PackageId>
+        <Description>RDH Framework HTTP presentation layer providing dynamic endpoint discovery, API versioning, and ASP.NET Core integration.</Description>
     </PropertyGroup>
 
     <ItemGroup>

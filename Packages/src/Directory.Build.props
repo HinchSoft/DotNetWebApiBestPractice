@@ -1,0 +1,19 @@
+<Project>
+    <PropertyGroup>
+        <!-- Package Metadata -->
+        <Title>RDH Framework $(MSBuildProjectName)</Title>
+        <Authors>David Hinchliffe</Authors>
+        <RepositoryUrl>https://github.com/HinchSoft/DotNetWebApiBestPractice</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/HinchSoft/DotNetWebApiBestPractice</PackageProjectUrl>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+
+        <!-- Assembly Properties -->
+        <Company>HinchSoft</Company>
+        <Product>RDH best practices framework</Product>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('readme.md')">
+        <None Include="readme.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+</Project>

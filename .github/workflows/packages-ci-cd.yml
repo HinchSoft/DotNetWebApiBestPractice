@@ -41,6 +41,9 @@ jobs:
       semVer: ${{ steps.gitversion.outputs.semVer }}
       fullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}
       majorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }}
+      assemblySemVer: ${{ steps.gitversion.outputs.assemblySemVer }}
+      assemblySemFileVer: ${{ steps.gitversion.outputs.assemblySemFileVer }}
+      informationalVersion: ${{ steps.gitversion.outputs.informationalVersion }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -87,7 +90,12 @@ jobs:
         run: dotnet restore Packages.slnf
 
       - name: Build packages and tests
-        run: dotnet build Packages.slnf --configuration Release --no-restore /p:Version=${{ needs.determine-version.outputs.semVer }}
+        run: >
+          dotnet build Packages.slnf --configuration Release --no-restore
+          /p:Version=${{ needs.determine-version.outputs.semVer }}
+          /p:AssemblyVersion=${{ needs.determine-version.outputs.assemblySemVer }}
+          /p:FileVersion=${{ needs.determine-version.outputs.assemblySemFileVer }}
+          /p:InformationalVersion=${{ needs.determine-version.outputs.informationalVersion }}
 
   test:
     name: Test Packages
@@ -125,13 +133,21 @@ jobs:
         run: dotnet restore Packages.slnf
 
       - name: Build packages
-        run: dotnet build Packages.slnf --configuration Release --no-restore /p:Version=${{ needs.determine-version.outputs.semVer }}
+        run: >
+          dotnet build Packages.slnf --configuration Release --no-restore
+          /p:Version=${{ needs.determine-version.outputs.semVer }}
+          /p:AssemblyVersion=${{ needs.determine-version.outputs.assemblySemVer }}
+          /p:FileVersion=${{ needs.determine-version.outputs.assemblySemFileVer }}
+          /p:InformationalVersion=${{ needs.determine-version.outputs.informationalVersion }}
 
       - name: Pack NuGet packages
         run: |
           mkdir -p ./nupkgs
           VERSION="${{ needs.determine-version.outputs.semVer }}"
-          PACK_ARGS="Packages.slnf --configuration Release --no-build --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=$VERSION"
+          ASSEMBLY_VERSION="${{ needs.determine-version.outputs.assemblySemVer }}"
+          FILE_VERSION="${{ needs.determine-version.outputs.assemblySemFileVer }}"
+          INFORMATIONAL_VERSION="${{ needs.determine-version.outputs.informationalVersion }}"
+          PACK_ARGS="Packages.slnf --configuration Release --no-build --output ./nupkgs /p:PackageVersion=$VERSION /p:Version=$VERSION /p:AssemblyVersion=$ASSEMBLY_VERSION /p:FileVersion=$FILE_VERSION /p:InformationalVersion=$INFORMATIONAL_VERSION"
           if [ -n "${{ inputs.version_suffix }}" ]; then
             PACK_ARGS="$PACK_ARGS --version-suffix ${{ inputs.version_suffix }}"
           fi
