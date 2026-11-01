@@ -1,5 +1,5 @@
-﻿using RDH.Core.CQRS;
+using RDH.Core.CQRS;
 
 namespace DemoApplication.Handlers.AddUser;
 
-public record AddUserCommand(string FirstName, string LastName, string Email, DateOnly DateOfBirth) : ICommand;
+public record AddUserCommand(string FirstName, string LastName, string Email, DateOnly? DateOfBirth) : ICommand;

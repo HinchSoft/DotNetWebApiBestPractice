@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RDH.ApplicationLayer.Data;
 
 namespace RDH.EFInfrastructure.Data;

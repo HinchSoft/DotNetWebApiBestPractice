@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 // ReSharper disable once CheckNamespace
 namespace FluentValidation;

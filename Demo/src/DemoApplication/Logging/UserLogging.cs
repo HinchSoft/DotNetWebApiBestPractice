@@ -1,4 +1,4 @@
-﻿using DemoDomain.Models;
+using DemoDomain.Models;
 using Microsoft.Extensions.Logging;
 using RDH.Core.PIILogging;
 

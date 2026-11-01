@@ -1,4 +1,4 @@
-﻿using TestHelper.Architecture;
+using TestHelper.Architecture;
 
 namespace TestHelperTests.Architecture;
 

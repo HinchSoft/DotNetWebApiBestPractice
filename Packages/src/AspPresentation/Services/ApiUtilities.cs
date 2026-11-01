@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using RDH.ApplicationLayer.Services;
 
@@ -27,13 +27,13 @@ internal class ApiUtilities : IApiUtilities
         var query = _contextAccessor.HttpContext?.Request.Query;
         var headers = _contextAccessor.HttpContext?.Request.Headers;
 
-        if (headers.ContainsKey(HEADER_PAGENO))
+        if (headers?.ContainsKey(HEADER_PAGENO) ?? false)
             int.TryParse(headers[HEADER_PAGENO], out pgNo);
-        else if (query.ContainsKey(QUERY_PAGENO))
+        else if (query?.ContainsKey(QUERY_PAGENO) ?? false)
             int.TryParse(query[QUERY_PAGENO], out pgNo);
-        if (headers.ContainsKey(HEADER_PAGESIZE))
+        if (headers?.ContainsKey(HEADER_PAGESIZE) ?? false)
             int.TryParse(headers[HEADER_PAGESIZE], out pgSz);
-        else if (query.ContainsKey(QUERY_PAGESIZE))
+        else if (query?.ContainsKey(QUERY_PAGESIZE) ?? false)
             int.TryParse(query[QUERY_PAGESIZE], out pgSz);
         if (pgNo > 0 && pgSz > 0)
             Pagination = new Pagination(pgNo, pgSz);

@@ -1,4 +1,4 @@
-﻿
+
 using TestHelper.Architecture;
 
 namespace ArchitectureTests;

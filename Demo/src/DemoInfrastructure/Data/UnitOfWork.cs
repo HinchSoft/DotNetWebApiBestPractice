@@ -1,4 +1,4 @@
-﻿using RDH.EFInfrastructure.Data;
+using RDH.EFInfrastructure.Data;
 
 namespace DemoInfrastructure.Data;
 

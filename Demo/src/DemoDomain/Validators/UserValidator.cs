@@ -1,4 +1,4 @@
-﻿using DemoDomain.Models;
+using DemoDomain.Models;
 using FluentValidation;
 
 namespace DemoDomain.Validators;

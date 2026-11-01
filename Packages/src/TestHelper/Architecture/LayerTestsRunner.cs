@@ -1,4 +1,4 @@
-﻿using ArchUnitNET.xUnit;
+using ArchUnitNET.xUnit;
 using Xunit;
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
@@ -13,7 +13,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void DomainLayer_ShouldNotDependOn_EntityFramework()
     {
-        if(Architecture.DomainAssembly is null)
+        if (Architecture.DomainAssembly is null)
             throw new Exception($"$XunitDynamicSkip$Domain assembly is not set.");
 
         Types().That().ResideInAssembly(Architecture.DomainAssembly).Should()
@@ -25,7 +25,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void ApplicationLayer_ShouldNotDependOn_EntityFramework()
     {
-        if(Architecture.ApplicationAssembly is null)
+        if (Architecture.ApplicationAssembly is null)
             throw new Exception($"$XunitDynamicSkip$Application assembly is not set.");
 
         Types().That().ResideInAssembly(Architecture.ApplicationAssembly).Should()
@@ -37,7 +37,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void DomainLayer_ShouldNotDependOn_ApplicationLayer()
     {
-        if(Architecture.DomainLayer is null || Architecture.ApplicationLayer is null)
+        if (Architecture.DomainLayer is null || Architecture.ApplicationLayer is null)
             throw new Exception($"$XunitDynamicSkip$Domain or Application assembly is not set.");
 
         Types().That().Are(Architecture.DomainLayer).Should()
@@ -48,7 +48,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void DomainLayer_ShouldNotDependOn_InfrastructureLayer()
     {
-        if(Architecture.DomainLayer is null || Architecture.InfrastructureLayer is null)
+        if (Architecture.DomainLayer is null || Architecture.InfrastructureLayer is null)
             throw new Exception($"$XunitDynamicSkip$Domain or Infrastructure assembly is not set.");
 
         Types().That().Are(Architecture.DomainLayer).Should()
@@ -59,7 +59,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void DomainLayer_ShouldNotDependOn_PresentationLayer()
     {
-        if(Architecture.DomainLayer is null || Architecture.PresentationLayer is null)
+        if (Architecture.DomainLayer is null || Architecture.PresentationLayer is null)
             throw new Exception($"$XunitDynamicSkip$Domain or Presentation assembly is not set.");
 
         Types().That().Are(Architecture.DomainLayer).Should()
@@ -70,7 +70,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void ApplicationLayer_ShouldNotDependOn_InfrastructureLayer()
     {
-        if(Architecture.ApplicationLayer is null || Architecture.InfrastructureLayer is null)
+        if (Architecture.ApplicationLayer is null || Architecture.InfrastructureLayer is null)
             throw new Exception($"$XunitDynamicSkip$Application or Infrastructure assembly is not set.");
         Types().That().Are(Architecture.ApplicationLayer).Should()
             .NotDependOnAny(Architecture.InfrastructureLayer)
@@ -80,7 +80,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void ApplicationLayer_ShouldNotDependOn_PresentationLayer()
     {
-        if(Architecture.ApplicationLayer is null || Architecture.PresentationLayer is null)
+        if (Architecture.ApplicationLayer is null || Architecture.PresentationLayer is null)
             throw new Exception($"$XunitDynamicSkip$Application or Presentation assembly is not set.");
 
         Types().That().Are(Architecture.ApplicationLayer).Should()
@@ -91,7 +91,7 @@ public abstract class LayerTestsRunner<TArchitecture>
     [Fact]
     public void InfrastructureLayer_ShouldNotDependOn_PresentationLayer()
     {
-        if(Architecture.InfrastructureLayer is null || Architecture.PresentationLayer is null)
+        if (Architecture.InfrastructureLayer is null || Architecture.PresentationLayer is null)
             throw new Exception($"$XunitDynamicSkip$Infrastructure or Presentation assembly is not set.");
 
         Types().That().Are(Architecture.InfrastructureLayer).Should()

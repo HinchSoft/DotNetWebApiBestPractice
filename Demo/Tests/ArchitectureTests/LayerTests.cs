@@ -1,8 +1,8 @@
-﻿using TestHelper.Architecture;
+using TestHelper.Architecture;
 
 namespace ArchitectureTests;
 
-public class LayerTests:LayerTestsRunner<Architecture>
+public class LayerTests : LayerTestsRunner<Architecture>
 {
 
 }

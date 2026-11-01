@@ -10,10 +10,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="8.10.0"/>
-        <PackageReference Include="TngTech.ArchUnitNET.xUnit" Version="0.13.4"/>
-        <PackageReference Include="xunit.analyzers" Version="2.0.0"/>
-        <PackageReference Include="xunit.v3.extensibility.core" Version="4.0.0"/>
+        <PackageReference Include="FluentAssertions" Version="8.11.0" />
+        <PackageReference Include="TngTech.ArchUnitNET.xUnit" Version="0.13.5" />
+        <PackageReference Include="xunit.analyzers" Version="2.2.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="xunit.v3.extensibility.core" Version="4.0.2" />
     </ItemGroup>
 
     <ItemGroup>

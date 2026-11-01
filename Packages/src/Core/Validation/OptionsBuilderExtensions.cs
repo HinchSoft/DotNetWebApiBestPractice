@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using RDH.Core.Validation;
 
 // ReSharper disable once CheckNamespace

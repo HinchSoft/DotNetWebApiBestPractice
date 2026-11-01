@@ -1,4 +1,4 @@
-﻿using DemoApplication.Handlers.AddUser;
+using DemoApplication.Handlers.AddUser;
 using TestHelper.Architecture;
 
 namespace ArchitectureTests;

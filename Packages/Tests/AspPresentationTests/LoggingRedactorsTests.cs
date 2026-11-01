@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using NSubstitute;
 using RDH.AspPresentation.LoggingRedactors;

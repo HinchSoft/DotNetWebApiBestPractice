@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.ServerSentEvents;
 using Microsoft.AspNetCore.Http;

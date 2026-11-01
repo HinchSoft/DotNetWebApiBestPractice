@@ -1,4 +1,4 @@
-﻿using DemoInfrastructure.Data;
+using DemoInfrastructure.Data;
 using RDH.ApplicationLayer.Data;
 
 // ReSharper disable once CheckNamespace

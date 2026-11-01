@@ -11,7 +11,6 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 builder.Services.AddApiVersioning(opt =>
 {
     opt.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
@@ -21,7 +20,7 @@ builder.Services.AddApiVersioning(opt =>
 {
     opt.GroupNameFormat = "'v'VVV";
     opt.SubstituteApiVersionInUrl = true;
-});
+}).AddOpenApi();
 
 builder.AddGlobalProblemDetails();
 builder.Services.AddValidation();
@@ -43,7 +42,7 @@ app.MapDefaultEndpoints();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi().WithDocumentPerVersion();
     app.MapScalarApiReference(options =>
     {
         options.WithTheme(ScalarTheme.Mars)
