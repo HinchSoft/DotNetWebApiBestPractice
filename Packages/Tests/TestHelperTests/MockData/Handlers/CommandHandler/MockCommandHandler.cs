@@ -1,4 +1,4 @@
-﻿using RDH.Core.CQRS;
+using RDH.Core.CQRS;
 
 namespace TestHelperTests.MockData.Handlers.CommandHandler;
 

@@ -1,4 +1,4 @@
-﻿namespace RDH.ApplicationLayer.Data;
+namespace RDH.ApplicationLayer.Data;
 
 public interface IUnitOfWork
 {

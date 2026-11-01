@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
 using RDH.ApplicationLayer.Services;
 using RDH.AspPresentation.Exceptions;
 using RDH.AspPresentation.LoggingRedactors;

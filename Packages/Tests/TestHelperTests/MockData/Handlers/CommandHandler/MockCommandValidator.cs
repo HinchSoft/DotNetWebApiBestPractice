@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace TestHelperTests.MockData.Handlers.CommandHandler;
 

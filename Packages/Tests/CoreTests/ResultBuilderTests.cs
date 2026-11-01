@@ -1,4 +1,4 @@
-﻿using CQRSServicesTests.TestObjects;
+using CQRSServicesTests.TestObjects;
 using FluentAssertions;
 using RDH.Core.Results;
 

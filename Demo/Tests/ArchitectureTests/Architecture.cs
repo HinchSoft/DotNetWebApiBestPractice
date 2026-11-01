@@ -1,4 +1,4 @@
-﻿using ArchUnitNET.Domain;
+using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using DemoApplication.Handlers;
 using DemoApplication.Handlers.AddUser;
@@ -8,7 +8,7 @@ using Type = System.Type;
 
 namespace ArchitectureTests;
 
-public class Architecture:BaseArchitecture
+public class Architecture : BaseArchitecture
 {
     protected override Type? DomainAssemblyMember => typeof(DemoDomain.Models.User);
     protected override Type? ApplicationAssemblyMember => typeof(AddUserCommand);

@@ -1,6 +1,6 @@
-﻿using RDH.Core.CQRS;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using RDH.Core.CQRS;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;

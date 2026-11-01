@@ -1,6 +1,6 @@
-﻿using Asp.Versioning.Builder;
-using DemoApplication.Handlers;
+using Asp.Versioning.Builder;
 using DemoApi.Endpoints.Dtos;
+using DemoApplication.Handlers;
 using DemoApplication.Handlers.AddUser;
 using Microsoft.AspNetCore.Mvc;
 using RDH.Core.CQRS;

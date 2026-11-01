@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ internal sealed class ValidationExceptionHandler(IProblemDetailsService detailsS
             return false;
 
         var ext = resultException.Errors.ToDictionary<ValidationFailure?, string, object>(item => "Problem",
-            item => item);
+            item => item!);
 
         httpContext.Response.StatusCode = resultException.GetStatus();
 
@@ -31,7 +33,7 @@ internal sealed class ValidationExceptionHandler(IProblemDetailsService detailsS
                 Type = resultException.GetStatusCode(),
                 Title = $"A problem has occured",
                 Detail = exception.Message,
-                Extensions = ext
+                Extensions = ext!
             }
         });
     }

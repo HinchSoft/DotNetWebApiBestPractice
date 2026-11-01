@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentValidation;
 using RDH.Core.CQRS;
 using Xunit;

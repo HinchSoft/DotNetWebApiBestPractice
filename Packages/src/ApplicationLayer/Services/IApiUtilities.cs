@@ -1,4 +1,4 @@
-﻿namespace RDH.ApplicationLayer.Services;
+namespace RDH.ApplicationLayer.Services;
 
 public interface IApiUtilities
 {

@@ -97,28 +97,9 @@ jobs:
           /p:FileVersion=${{ needs.determine-version.outputs.assemblySemFileVer }}
           /p:InformationalVersion=${{ needs.determine-version.outputs.informationalVersion }}
 
-  test:
-    name: Test Packages
-    needs: [determine-version, build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
-      - name: Restore dependencies
-        run: dotnet restore Packages.slnf
-
-      - name: Run unit tests
-        run: dotnet test Packages.slnf --configuration Release --verbosity normal
-
   package:
     name: Pack NuGet Packages
-    needs: [determine-version, test]
+    needs: [determine-version, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

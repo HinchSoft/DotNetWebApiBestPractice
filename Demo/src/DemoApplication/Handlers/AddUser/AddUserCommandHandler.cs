@@ -1,4 +1,4 @@
-﻿using DemoApplication.Logging;
+using DemoApplication.Logging;
 using DemoDomain.Models;
 using FluentValidation;
 using Microsoft.Extensions.Logging;

@@ -1,4 +1,4 @@
-﻿using ArchUnitNET.Domain;
+using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 using Assembly = System.Reflection.Assembly;
@@ -68,4 +68,5 @@ public abstract class BaseArchitecture
     public IObjectProvider<IType>? DomainLayer => _domainLayer;
     public IObjectProvider<IType>? ApplicationLayer => _applicationLayer;
     public IObjectProvider<IType>? InfrastructureLayer => _infrastructureLayer;
-    public IObjectProvider<IType>? PresentationLayer => _presentationLayer;}
+    public IObjectProvider<IType>? PresentationLayer => _presentationLayer;
+}

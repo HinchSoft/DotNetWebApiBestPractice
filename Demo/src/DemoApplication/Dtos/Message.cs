@@ -1,4 +1,4 @@
-﻿namespace DemoApplication.Dtos;
+namespace DemoApplication.Dtos;
 
 public record Message(
     DateTime Date,

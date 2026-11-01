@@ -1,4 +1,4 @@
-﻿using RDH.Core;
+using RDH.Core;
 
 namespace DemoDomain.Models;
 

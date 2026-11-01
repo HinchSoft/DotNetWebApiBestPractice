@@ -1,4 +1,4 @@
-﻿using ArchUnitNET.xUnit;
+using ArchUnitNET.xUnit;
 using RDH.Core.CQRS;
 using Xunit;
 using static ArchUnitNET.Fluent.ArchRuleDefinition;

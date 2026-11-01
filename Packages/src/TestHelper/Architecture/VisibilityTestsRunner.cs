@@ -1,4 +1,4 @@
-﻿using ArchUnitNET.xUnit;
+using ArchUnitNET.xUnit;
 using FluentValidation;
 using RDH.Core.CQRS;
 using Xunit;
