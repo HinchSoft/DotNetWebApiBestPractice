@@ -3,6 +3,46 @@
 This Repo is split into two parts; the demo application and the shared packages that are intended for reuse with real
 world applications.
 
+## Getting Started & Repository Setup
+
+### Prerequisites
+- [.NET SDK](https://dotnet.microsoft.com/download) (version specified in `global.json`)
+- [Git](https://git-scm.com/)
+- [GitHub CLI (`gh`)](https://cli.github.com/) (optional, required if using `--signoff`)
+
+### Register Local Git Hooks
+To ensure build, tests, and formatting checks pass before pushing, register the tracked `.githooks` for this repository:
+
+**Bash / macOS / Linux / Git Bash:**
+```sh
+./ci/setup-hooks.sh
+```
+
+**PowerShell (Windows):**
+```powershell
+./ci/setup-hooks.ps1
+```
+
+Alternatively, configure Git directly:
+```sh
+git config core.hooksPath .githooks
+```
+*(This sets `core.hooksPath` locally in `.git/config` for this repository only).*
+
+### Local CI Gate
+You can also run the local CI gate manually at any time:
+
+```sh
+./ci/local-ci.sh
+```
+
+To run the checks and automatically sign off via the GitHub CLI:
+```sh
+./ci/local-ci.sh --signoff
+```
+
+The script caches the gate status for the current `HEAD` commit (`.git/ci-passed`) to prevent running redundant checks.
+
 ## Architecture
 
 Vertical slice architecture is recommended as it helps keep related code together, but it still uses an onion skin
@@ -56,43 +96,3 @@ public static partial class UserLogging
         [PersonalPII] string email);
 }
 ```
-
-## Getting Started & Repository Setup
-
-### Prerequisites
-- [.NET SDK](https://dotnet.microsoft.com/download) (version specified in `global.json`)
-- [Git](https://git-scm.com/)
-- [GitHub CLI (`gh`)](https://cli.github.com/) (optional, required if using `--signoff`)
-
-### Register Local Git Hooks
-To ensure build, tests, and formatting checks pass before pushing, register the tracked `.githooks` for this repository:
-
-**Bash / macOS / Linux / Git Bash:**
-```sh
-./ci/setup-hooks.sh
-```
-
-**PowerShell (Windows):**
-```powershell
-./ci/setup-hooks.ps1
-```
-
-Alternatively, configure Git directly:
-```sh
-git config core.hooksPath .githooks
-```
-*(This sets `core.hooksPath` locally in `.git/config` for this repository only).*
-
-### Local CI Gate
-You can also run the local CI gate manually at any time:
-
-```sh
-./ci/local-ci.sh
-```
-
-To run the checks and automatically sign off via the GitHub CLI:
-```sh
-./ci/local-ci.sh --signoff
-```
-
-The script caches the gate status for the current `HEAD` commit (`.git/ci-passed`) to prevent running redundant checks.
