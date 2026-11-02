@@ -1,5 +1,8 @@
 # .Net WebApi Best Practice
 
+[![Packages CI/CD](https://github.com/HinchSoft/DotNetWebApiBestPractice/actions/workflows/packages-ci-cd.yml/badge.svg?branch=main)](https://github.com/HinchSoft/DotNetWebApiBestPractice/actions/workflows/packages-ci-cd.yml)
+[![Last Commit](https://img.shields.io/github/last-commit/HinchSoft/DotNetWebApiBestPractice/main?label=last%20merge)](https://github.com/HinchSoft/DotNetWebApiBestPractice/commits/main)
+
 This Repo is split into two parts; the demo application and the shared packages that are intended for reuse with real
 world applications.
 
