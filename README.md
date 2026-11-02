@@ -9,9 +9,10 @@ world applications.
 - [.NET SDK](https://dotnet.microsoft.com/download) (version specified in `global.json`)
 - [Git](https://git-scm.com/)
 - [GitHub CLI (`gh`)](https://cli.github.com/) (optional, required if using `--signoff`)
+- [gh-signoff extension](https://github.com/basecamp/gh-signoff): `gh extension install basecamp/gh-signoff`
 
-### Register Local Git Hooks
-To ensure build, tests, and formatting checks pass before pushing, register the tracked `.githooks` for this repository:
+### Register Local Git Hooks & Alias
+To ensure build, tests, and formatting checks pass before pushing, register the tracked `.githooks` and the `push-signoff` alias:
 
 **Bash / macOS / Linux / Git Bash:**
 ```sh
@@ -26,17 +27,30 @@ To ensure build, tests, and formatting checks pass before pushing, register the 
 Alternatively, configure Git directly:
 ```sh
 git config core.hooksPath .githooks
+git config alias.push-signoff "!git push && gh signoff"
 ```
-*(This sets `core.hooksPath` locally in `.git/config` for this repository only).*
+*(This sets `core.hooksPath` and `alias.push-signoff` locally in `.git/config` for this repository only).*
+
+### Pushing & Automated Signoff
+To push your verified changes and immediately sign off on GitHub in a single step, use the `push-signoff` alias:
+
+```sh
+git push-signoff
+```
+
+This command will:
+1. Trigger the local `pre-push` hook to run CI verification (`dotnet build -warnaserror`, `dotnet test`, `dotnet format --verify-no-changes`).
+2. Push your commits to GitHub upon passing the checks.
+3. Automatically execute `gh signoff` to post a green `signoff: SUCCESS` check on GitHub.
 
 ### Local CI Gate
-You can also run the local CI gate manually at any time:
+You can also run the local CI gate manually at any time without pushing:
 
 ```sh
 ./ci/local-ci.sh
 ```
 
-To run the checks and automatically sign off via the GitHub CLI:
+To run the checks and automatically sign off on the current commit via the GitHub CLI:
 ```sh
 ./ci/local-ci.sh --signoff
 ```
